@@ -24,7 +24,7 @@ const UpdateProduct = () => {
   //get single product
   const getSingleProduct = async () =>{
       try {
-        const { data } = await axios.get(`/api/v1/product/single-product/${params.slug}`);
+        const { data } = await axios.get(`https://apni-dukaan-uccj.onrender.com/api/v1/product/single-product/${params.slug}`);
         setName(data.products.name);
         setId(data.products._id);
         setDescription(data.products.description);
@@ -48,7 +48,7 @@ const UpdateProduct = () => {
   //get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axios.get("https://apni-dukaan-uccj.onrender.com/api/v1/category/get-category");
       if (data?.success) {
         setCategories(data.category);
       }
@@ -69,7 +69,7 @@ const UpdateProduct = () => {
       productData.append("shipping",shipping);
       photo &&  productData.append("photo",photo);
       productData.append("category",category);
-      const {data} = await axios.put(`/api/v1/product/update-product/${id}`,productData);
+      const {data} = await axios.put(`https://apni-dukaan-uccj.onrender.com/api/v1/product/update-product/${id}`,productData);
       if (data?.success) {
         toast.success(`${data.product.name} is creted`);
         navigate("/dashboard/admin/products")
@@ -90,7 +90,7 @@ const UpdateProduct = () => {
     try {
         let answer = window.prompt("Are you Really want to delete this product");
         if(!answer) return;
-        const {data} = await axios.delete(`/api/v1/product/delete-product/${p_id}`);
+        const {data} = await axios.delete(`https://apni-dukaan-uccj.onrender.com/api/v1/product/delete-product/${p_id}`);
         if(data.success)
         {
           toast.success(`product deleted successfully`);

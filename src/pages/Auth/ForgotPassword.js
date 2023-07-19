@@ -15,7 +15,7 @@ const ForgotPassword = () => {
       const handleSubmit = async (e) =>{
         e.preventDefault();
         try {
-            const res = await axios.post(`/api/v1/auth/forgot-password`,{email,question,newPassword});
+            const res = await axios.post(`https://apni-dukaan-uccj.onrender.com/api/v1/auth/forgot-password`,{email,question,newPassword});
             if(res && res.data.success)
             {
                 toast.success(res && res.data.message);

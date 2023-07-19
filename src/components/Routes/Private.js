@@ -11,7 +11,7 @@ export default function PrivateRoute(){
         const authCheck = async() =>{
             const data = localStorage.getItem('auth')
             const parseData = JSON.parse(data)
-            const res = await axios.get('/api/v1/auth/user-auth', {
+            const res = await axios.get('https://apni-dukaan-uccj.onrender.com/api/v1/auth/user-auth', {
                 headers: {
                     Authorization: parseData.token
                 }

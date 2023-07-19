@@ -15,7 +15,7 @@ const ProductDetails = () => {
   const getProduct = async () => {
     try {
       const { data } = await axios.get(
-        `/api/v1/product/single-product/${params.slug}`
+        `https://apni-dukaan-uccj.onrender.com/api/v1/product/single-product/${params.slug}`
       );
       setProduct(data?.products);
       getSimilarProducts(data?.products?._id,data?.products?.category._id);
@@ -27,7 +27,7 @@ const ProductDetails = () => {
   //get similar products
   const getSimilarProducts = async(pid,cid) =>{
     try {
-      const {data} = await axios.get(`/api/v1/product/related-product/${pid}/${cid}`);
+      const {data} = await axios.get(`https://apni-dukaan-uccj.onrender.com/api/v1/product/related-product/${pid}/${cid}`);
       setRelatedProduct(data?.products);
     } catch (error) {
       console.log(error);

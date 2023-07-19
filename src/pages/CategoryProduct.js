@@ -10,7 +10,7 @@ const CategoryProduct = () => {
     const [category,setCategory] = useState([]);
     const getProductByCat = async() =>{
         try {
-            const {data} = await axios.get(`/api/v1/product/category-product/${params?.slug}`);
+            const {data} = await axios.get(`https://apni-dukaan-uccj.onrender.com/api/v1/product/category-product/${params?.slug}`);
             setProducts(data?.products);
             setCategory(data?.category);
         } catch (error) {

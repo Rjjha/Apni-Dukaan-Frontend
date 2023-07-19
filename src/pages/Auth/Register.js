@@ -18,7 +18,7 @@ const Register = () => {
       const handleSubmit = async (e) =>{
         e.preventDefault();
         try {
-            const res = await axios.post(`/api/v1/auth/register`,{name,email,phone,address,question,password});
+            const res = await axios.post(`https://apni-dukaan-uccj.onrender.com/api/v1/auth/register`,{name,email,phone,address,question,password});
             if(res && res.data.success)
             {
                 toast.success(res && res.data.message);

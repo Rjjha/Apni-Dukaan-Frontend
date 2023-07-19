@@ -11,7 +11,7 @@ const SearchInput = () => {
     e.preventDefault();
     try {
       const { data } = await axios.get(
-        `/api/v1/product/search-product/${values.keyword}`
+        `https://apni-dukaan-uccj.onrender.com/api/v1/product/search-product/${values.keyword}`
       );
       setValues({ ...values, results: data });
       navigate("/search");

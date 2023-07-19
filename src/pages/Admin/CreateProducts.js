@@ -21,7 +21,7 @@ const CreateProducts = () => {
   //get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axios.get("https://apni-dukaan-uccj.onrender.com/api/v1/category/get-category");
       if (data?.success) {
         setCategories(data.category);
       }
@@ -42,7 +42,7 @@ const CreateProducts = () => {
       productData.append("shipping",shipping);
       productData.append("photo",photo);
       productData.append("category",category);
-      const {data} = await axios.post("/api/v1/product/create-product",productData);
+      const {data} = await axios.post("https://apni-dukaan-uccj.onrender.com/api/v1/product/create-product",productData);
       if (data?.success) {
         toast.success(`${data.product.name} is creted`);
         navigate("/dashboard/admin/products")

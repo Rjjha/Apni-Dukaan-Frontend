@@ -21,7 +21,7 @@ const HomePage = () => {
   //get toal count
   const getTotal = async () =>{
     try{
-      const {data} = await axios.get("/api/v1/product/count-product");
+      const {data} = await axios.get("https://apni-dukaan-uccj.onrender.com/api/v1/product/count-product");
       setTotal(data?.total);
     } catch(error){
       console.log(error);
@@ -31,7 +31,7 @@ const HomePage = () => {
 const loadMore = async() =>{
   try{
     setLoading(true);
-    const {data} = await axios.get(`/api/v1/product/list-product/${page}`);
+    const {data} = await axios.get(`https://apni-dukaan-uccj.onrender.com/api/v1/product/list-product/${page}`);
     setLoading(false);
     setProducts([...products, ...data?.products]);
   }catch (error){
@@ -43,7 +43,7 @@ const loadMore = async() =>{
   //get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axios.get("https://apni-dukaan-uccj.onrender.com/api/v1/category/get-category");
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -76,7 +76,7 @@ const loadMore = async() =>{
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/v1/product/list-product/${page}`);
+      const { data } = await axios.get(`https://apni-dukaan-uccj.onrender.com/api/v1/product/list-product/${page}`);
       setLoading(false);
       if (data?.success) {
         setProducts(data.products);
@@ -91,7 +91,7 @@ const loadMore = async() =>{
   //get all filter products
   const filterProducts = async () =>{
     try {
-      const {data} = await axios.post("/api/v1/product/filter-product",{checked,radio});
+      const {data} = await axios.post("https://apni-dukaan-uccj.onrender.com/api/v1/product/filter-product",{checked,radio});
       setTotal(data?.products?.length)
       setProducts(data?.products)
     } catch (error) {
