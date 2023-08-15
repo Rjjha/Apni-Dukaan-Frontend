@@ -134,7 +134,7 @@ const Products = () => {
   }, [checked, radio]);
 
   return (
-    <Layout title={"ALl Products - Best offers "}>
+    <Layout title={"ALL Products - Best offers "}>
       <div className="pathroute">
         <h2>
           <span className="p1">Home</span>

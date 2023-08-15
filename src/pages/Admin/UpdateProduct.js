@@ -5,8 +5,9 @@ import axios from "axios";
 import { Select } from "antd";
 import toast from "react-hot-toast";
 import { useNavigate ,useParams} from "react-router-dom";
-const { Option } = Select;
 import base_url from "../../utils/api";
+const { Option } = Select;
+
 
 const UpdateProduct = () => {
   const navigate = useNavigate();
