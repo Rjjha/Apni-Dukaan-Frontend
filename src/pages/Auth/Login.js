@@ -2,9 +2,11 @@ import React,{useState} from "react";
 import Layout from "../../components/Layout/Layout";
 import toast from 'react-hot-toast';
 import axios from "axios";
-//import "../../Styles/AuthStyles.css";
+import "../../Styles/AuthStyles.css";
 import { useNavigate,useLocation } from "react-router-dom";
 import {useAuth} from "../../Context/Auth";
+import base_url from "../../utils/api";
+import { Link } from "react-router-dom";
 
 const Login = () => {
       const [email,setEmail] = useState("");
@@ -17,7 +19,7 @@ const Login = () => {
       const handleSubmit = async (e) =>{
         e.preventDefault();
         try {
-            const res = await axios.post(`https://apni-dukaan-uccj.onrender.com/api/v1/auth/login`,{email,password});
+            const res = await axios.post(`${base_url}/api/v1/auth/login`,{email,password});
             if(res && res.data.success)
             {
                 toast.success(res && res.data.message);
@@ -41,21 +43,21 @@ const Login = () => {
       
   return (
     <Layout title="Login - Apni Dukaan">
-      <div className="form-container" style={{ minHeight: "70vh" }}>
+      <div className="form-container text-center" style={{ minHeight: "50vh"}}>
         <form onSubmit={handleSubmit}>
-        <h4 className="title">Login Form</h4>
-          <div className="mb-2">
+        <h4 className="title">Login</h4>
+          <div className="mb-4">
             <input
               type="text"
               value={email}
               onChange={(e)=>setEmail(e.target.value)}
               className="form-control"
               id="exampleInputEmail1"
-              placeholder="Email Address"
+              placeholder="Email"
               required
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-4">
             <input
               type="password"
               value={password}
@@ -66,15 +68,13 @@ const Login = () => {
               required
             />
           </div>
+          <div className="mb-4" style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
+           <Link to="/forgot-password" className="links">Forgot Password?</Link>
+           <Link to="/register" className="links">Register</Link>
+          </div>
           <button type="submit" className="btn btn-primary">
             Login
           </button>
-          <div className="mt-1">
-          <button type="button" className="btn btn-primary" style={{backgroundColor:"blue", opacity:"0.5"}} 
-          onClick={()=>{navigate("/forgot-password")}}>
-            Forgot Password
-          </button>
-          </div>
         </form>
       </div>
     </Layout>

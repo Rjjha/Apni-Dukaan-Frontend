@@ -2,8 +2,10 @@ import React,{useState} from "react";
 import Layout from "../../components/Layout/Layout";
 import toast from 'react-hot-toast';
 import axios from "axios";
-//import "../../Styles/AuthStyles.css";
+import "../../Styles/AuthStyles.css";
 import { useNavigate } from "react-router-dom";
+import base_url from "../../utils/api";
+import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
       const [email,setEmail] = useState("");
@@ -15,7 +17,7 @@ const ForgotPassword = () => {
       const handleSubmit = async (e) =>{
         e.preventDefault();
         try {
-            const res = await axios.post(`https://apni-dukaan-uccj.onrender.com/api/v1/auth/forgot-password`,{email,question,newPassword});
+            const res = await axios.post(`${base_url}/api/v1/auth/forgot-password`,{email,question,newPassword});
             if(res && res.data.success)
             {
                 toast.success(res && res.data.message);
@@ -33,10 +35,10 @@ const ForgotPassword = () => {
       
   return (
     <Layout title="ForgotPassword - Apni Dukaan">
-      <div className="form-container" style={{ minHeight: "70vh" }}>
+      <div className="form-container text-center" style={{ minHeight: "55vh"}}>
         <form onSubmit={handleSubmit}>
-        <h4 className="title">Forgot Password Form</h4>
-          <div className="mb-2">
+        <h4 className="title">Forgot</h4>
+          <div className="mb-4">
             <input
               type="text"
               value={email}
@@ -47,7 +49,7 @@ const ForgotPassword = () => {
               required
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-4">
             <input
               type="text"
               value={question}
@@ -58,7 +60,7 @@ const ForgotPassword = () => {
               required
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-4">
             <input
               type="password"
               value={newPassword}
@@ -68,6 +70,10 @@ const ForgotPassword = () => {
               placeholder="New Password"
               required
             />
+          </div>
+          <div className="mb-4" style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
+           <Link to="/login" className="links" style={{marginLeft:"7px"}}>Login</Link>
+           <Link to="/register" className="links" style={{marginRight:"7px"}}>Register</Link>
           </div>
           <button type="submit" className="btn btn-primary">
             Reset Password

@@ -1,0 +1,74 @@
+.card{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    margin: 12px;
+    border: 0;
+}
+
+.cntr{
+    position: relative;
+    background: #222;
+    border-radius: 0.25rem;
+    width: 15vw;
+}
+.cntr :hover{
+    opacity: 0.7;
+    transform: translate(-7px, -7px);
+    cursor: pointer;
+}
+.cntr img{
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 0.25rem;
+    transition: all 0.3s linear;
+}
+
+.ftr{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+.ftr h5{
+    margin-bottom: 0px;
+    font-weight: 400;
+    opacity: 0.9;
+}
+.ftr p{
+    color: #ab7a5f;
+    letter-spacing: 0.1rem;
+}
+
+@media screen and (max-width: 930px){
+    .cntr{
+        width: 25vw;
+    }
+    .cntr :hover{
+        opacity: 0.7;
+        transform: translate(-7px, -7px);
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 680px){
+    .cntr{
+        width: 35vw;
+    }
+    .cntr :hover{
+        opacity: 0.7;
+        transform: translate(-7px, -7px);
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 500px){
+    .cntr{
+        width: 50vw;
+    }
+    .cntr :hover{
+        opacity: 0.7;
+        transform: translate(-7px, -7px);
+        cursor: pointer;
+    }
+}

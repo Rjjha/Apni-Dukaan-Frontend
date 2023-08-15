@@ -1,194 +1,130 @@
-import React, { useState, useEffect } from "react";
+import React,{useState,useEffect} from "react";
 import Layout from "../components/Layout/Layout";
-import toast from "react-hot-toast";
-import axios from "axios";
-import { Checkbox , Radio} from "antd";
-import { Prices } from "../components/Prices";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../Context/Cart";
-
+import { GiCompass, GiDiamondHard, GiStabbedNote } from "react-icons/gi";
+import "../Styles/HomePage.css";
+import { useAuth } from "../Context/Auth";
+import axios from "axios";
+import base_url from "../utils/api";
 const HomePage = () => {
   const navigate = useNavigate();
-  const [cart,setCart] = useCart();
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [checked,setChecked] = useState([]);
-  const [radio,SetRadio] = useState([]);
-  const [total,setTotal] = useState(0); 
-  const [page,setPage] = useState(1);
-  const [loading,setLoading] = useState(false);
+  const [product,setProduct] = useState();
+  const [auth,setAuth] = useAuth();
 
-  //get toal count
-  const getTotal = async () =>{
-    try{
-      const {data} = await axios.get("https://apni-dukaan-uccj.onrender.com/api/v1/product/count-product");
-      setTotal(data?.total);
-    } catch(error){
-      console.log(error);
-    } 
-  }
-//load more
-const loadMore = async() =>{
-  try{
-    setLoading(true);
-    const {data} = await axios.get(`https://apni-dukaan-uccj.onrender.com/api/v1/product/list-product/${page}`);
-    setLoading(false);
-    setProducts([...products, ...data?.products]);
-  }catch (error){
-    setLoading(false);
-    console.log(error);
-  }
-}
-
-  //get all categories
-  const getAllCategory = async () => {
+  const featured = async() =>{
     try {
-      const { data } = await axios.get("https://apni-dukaan-uccj.onrender.com/api/v1/category/get-category");
-      if (data?.success) {
-        setCategories(data?.category);
+      const {data} = await axios.get(`${base_url}/api/v1/product/list-product/${1}`);
+      if(data)
+      {
+        setProduct(data.products);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error in getting all category");
-    }
-  };
-
-  //filter by category
-   const handleFilter = async (value ,id) =>{
-        try {
-          let all = [...checked];
-          if(value)
-          {
-            all.push(id);
-          }
-          else
-          {
-            all = all.filter((c) => c !== id);
-          }
-          setChecked(all);
-        } catch (error) {
-          console.log(error);
-          toast.error("Error in handling filter");
-        }
-   }
-
-  //get all products
-  const getAllProducts = async () => {
-    try {
-      setLoading(true);
-      const { data } = await axios.get(`https://apni-dukaan-uccj.onrender.com/api/v1/product/list-product/${page}`);
-      setLoading(false);
-      if (data?.success) {
-        setProducts(data.products);
-      }
-    } catch (error) {
-      setLoading(false)
-      console.log(error);
-      toast.error("Error in showing products");
-    }
-  };
-
-  //get all filter products
-  const filterProducts = async () =>{
-    try {
-      const {data} = await axios.post("https://apni-dukaan-uccj.onrender.com/api/v1/product/filter-product",{checked,radio});
-      setTotal(data?.products?.length)
-      setProducts(data?.products)
-    } catch (error) {
-      console.log(error);
-      toast.error("Error in filtering products");
     }
   }
-  //initializing loadMore
   useEffect(()=>{
-    if(page === 1) return;
-    loadMore();
-  },[page]);
-
-  //initializing products
-  useEffect(() => {
-    getAllCategory();
-    getTotal();
-  }, []);
-
-  useEffect(() => {
-    if (!checked.length && !radio.length) 
-    getAllProducts();
-  }, [checked.length, radio.length]);
-
-  useEffect(() =>{
-    if(checked.length || radio.length)
-    {
-      filterProducts();
-    }
-  },[checked,radio])
-
+    featured();
+  },[])
   return (
-    <Layout title={"All Products - Best Offers"}>
-      <div className="container-fluid m-3 p-3">
-        <div className="row">
-          <div className="col-md-3">
-            <h4 className="text-center">Filter By Category</h4>
-            <hr/>
-            <div className="d-flex flex-column">
-            {categories?.map((c) => (
-              <Checkbox
-                key={c._id}
-                onChange={(e) => handleFilter(e.target.checked,c._id)}
-              >
-                {c.name}
-              </Checkbox>
-            ))}
-           </div>
-           <h4 className="text-center mt-4">Filter By Price</h4>
-           <hr/>
-            <div className="d-flex flex-column">
-            <Radio.Group onChange={(e) => {SetRadio(e.target.value)}}>
-              {Prices?.map( p =>(
-                <div key={p._id}>
-                  <Radio value={p.Array}>
-                    {p.name}
-                  </Radio>
-                  </div>
-              ))}
-            </Radio.Group>
-           </div> 
-           <div className="d-flex mt-3">
-              <button className = "btn btn-success" onClick={()=>window.location.reload()}>Reset Filters</button>
-           </div>
+    <Layout>
+      <section className="hero">
+        <article className="article">
+          <h1>
+            Search Less <br /> Buy More
+          </h1>
+          <p>
+            Apni-Dukaan is an e-commerce platform which sells wide variety of
+            products essentials. It is a one-stop destination for all your
+            needs.
+          </p>
+          <button
+            className="btn text-center mt-4 button"
+            onClick={() => navigate("/products")}
+          >
+            Shop Now
+          </button>
+        </article>
+        <article className="photo">
+          <img src="/images/template.jpg" alt="photo" />
+        </article>
+      </section>
+
+      <section className="text-center featured">
+        <h2>Featured Products</h2>
+        <div className="under_score"></div>
+        <article>
+          <img src={product?.length ?  product[0]?.photo : "/images/template.jpg"} alt="photo" onClick={()=>navigate(`/product/${product[0].slug}`)} />
+          <div className="feat_prd">
+            {product?.length ?  <p className="p_tag1" onClick={()=>navigate(`/product/${product[0].slug}`)}>{product[0]?.name} </p> :<p className="p_tag1">Apni Dukaan</p> }
+            {product?.length ?  <p className="p_tag2" onClick={()=>navigate(`/product/${product[0].slug}`)}>₹ {product[0]?.price} </p> :<p className="p_tag2">₹ 500</p> }
           </div>
-          <div className="col-md-9">
-            <h3 className="text-center">All Products List </h3>
-            <div className="d-flex flex-wrap">
-            {products?.map( (p)=> (
-                <div className="card m-2" style={{ width: "18rem" }} key={p._id} >
-                <img src={p.photo}className="card-img-top" alt={p.name} />
-                <div className="card-body">
-                  <h5 className="card-title">{p.name}</h5>
-                  <p className="card-text">
-                   {p.description.substring(0,30)}
-                  </p>
-                  <p className="card-text">
-                    ₹ {p.price}
-                  </p>
-                  <div className="flex-row">
-                  <button className="btn btn-primary " onClick={() => navigate(`/product/${p.slug}`)} >More Details</button>
-                  <button className="btn btn-secondary ms-1" onClick={() =>{setCart([...cart,p]) ;localStorage.setItem('cart',JSON.stringify([...cart,p])) ;toast.success("Item Added to cart")}} >Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-            ))}
-            <div className = "m-2">
-              {products && products.length < total && (
-                <button className = "btn btn-warning" onClick ={(e) =>{e.preventDefault();setPage(page + 1)}}>
-                  {loading? "loading..." : "loadmore"}
-                </button>
-              )}
-            </div>
-            </div>
+        </article>
+        <div className="text-center mb-5 mt-5">
+          <button
+            className="btn all_prod button"
+            onClick={() => navigate("/products")}
+          >
+            All Products
+          </button>
+        </div>
+      </section>
+
+      <section className="section_3">
+        <div>
+          <article className="service">
+            <h3 style={{}}>
+              Your wish
+              <br />
+              Our command
+            </h3>
+            <p>
+              Customer satisfaction is the top-most priorty for Apni Dukaan. It
+              is the only the trust and support of our customers that we are now
+              reaching greater heights.
+            </p>
+          </article>
+          <div className="service_conatiner">
+            <article className="comp">
+              <span>
+                <GiCompass />
+              </span>
+              <h4>Mission</h4>
+              <p className="text-center">
+                Our mission is to provide our customers the best in class
+                products and services at a very reasonable price.
+              </p>
+            </article>
+            <article className="comp">
+              <span>
+                <GiDiamondHard />
+              </span>
+              <h4>Vision</h4>
+              <p className="text-center">
+                Our vision is to take Apni Dukaan to greater heights, by
+                providing our customers best in class service.
+              </p>
+            </article>
+            <article className="comp">
+              <span>
+                <GiStabbedNote />
+              </span>
+              <h4>History</h4>
+              <p className="text-center">
+                Apni Dukaan was started in July 22 with an initial aim to
+                provide the best in class services to our customers.
+              </p>
+            </article>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className="section_4 text-center">
+         <h2>Thank You <span>{auth?.user?.name}</span> for Visiting Our Website</h2>
+         <h4>In case of any query</h4>
+         <div>
+         <button className="button btn" onClick={() => navigate("/contact")}> Please Contact</button>
+         </div>
+      </section>
     </Layout>
   );
 };

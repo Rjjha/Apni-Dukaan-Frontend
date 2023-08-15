@@ -2,15 +2,18 @@ import React,{useState,useEffect} from 'react'
 import Layout from '../components/Layout/Layout'
 import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import base_url from '../utils/api';
+import Card from "../components/Card/Card.js";
 
 const CategoryProduct = () => {
     const params = useParams();
     const navigate = useNavigate();
     const [products,setProducts] = useState([]);
     const [category,setCategory] = useState([]);
+
     const getProductByCat = async() =>{
         try {
-            const {data} = await axios.get(`https://apni-dukaan-uccj.onrender.com/api/v1/product/category-product/${params?.slug}`);
+            const {data} = await axios.get(`${base_url}/api/v1/product/category-product/${params?.slug}`);
             setProducts(data?.products);
             setCategory(data?.category);
         } catch (error) {
@@ -24,30 +27,26 @@ const CategoryProduct = () => {
         }
     },[params?.slug]);
   return (
-    <Layout> 
-       <div className='container mt-3'>
-        <h4 className='text-center'>Category - {category?.name}</h4>
-        <h6 className="text-center">{products.length} Results Found</h6>
-        <div className="d-flex flex-wrap">
+    <Layout>
+      <div className="pathroute d-flex flex-column justify-content-center align-items-baseline">
+          <h2>
+          <span className="p1" onClick={()=>navigate("/")} >Home</span>
+              <span>/</span>
+              <span className="p2">{category.name}</span>
+          </h2>
+          <h4 className='text-center' style={{color:"#617d98"}}>{products.length < 1 ? "No Products found" : `Found ${products.length} Results`}</h4>
+        </div>
+        <div className='container mb-5'>
+            <div className='text-center'>
+              <div className="d-flex flex-wrap mt-4 justify-content-center">
             {products?.map( (p)=> (
-                <div className="card m-2" style={{ width: "18rem" }} key={p._id} >
-                <img src={p.photo}className="card-img-top" alt={p.name} />
-                <div className="card-body">
-                  <h5 className="card-title">{p.name}</h5>
-                  <p className="card-text">
-                   {p.description.substring(0,30)}
-                  </p>
-                  <p className="card-text">
-                    ₹ {p.price}
-                  </p>
-                  <button className="btn btn-primary ms-1" onClick={() => navigate(`/product/${p.slug}`)} >More Details</button>
-                  <button className="btn btn-secondary ms-1">Add to Cart</button>
-                </div>
-              </div>
+                <Card P_Id = {p._id} photo = {p.photo} name = {p.name} price = {p.price} slug={p.slug}/>
             ))}
             </div>
-       </div>
-    </Layout> 
+            </div>
+        </div>
+
+    </Layout>
   )
 }
 

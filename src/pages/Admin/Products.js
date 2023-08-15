@@ -4,6 +4,7 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import toast from "react-hot-toast";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import base_url from "../../utils/api";
 
 const Products = () => {
   const [products, SetProducts] = useState([]);
@@ -12,7 +13,7 @@ const Products = () => {
   //get all products
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("https://apni-dukaan-uccj.onrender.com/api/v1/product/get-product");
+      const { data } = await axios.get(`${base_url}/api/v1/product/get-product`);
       if (data?.success) {
         SetProducts(data.products);
       }
@@ -42,7 +43,7 @@ const Products = () => {
                 <div className="card-body">
                   <h5 className="card-title">{p.name}</h5>
                   <p className="card-text">
-                   {p.description.substring(0,30)}
+                   {p.description}
                   </p>
                 </div>
               </div>

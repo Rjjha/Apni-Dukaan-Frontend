@@ -5,7 +5,9 @@ import axios from "axios";
 import { Select } from "antd";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import base_url from "../../utils/api";
 const { Option } = Select;
+
 
 const CreateProducts = () => {
   const navigate = useNavigate();
@@ -21,7 +23,7 @@ const CreateProducts = () => {
   //get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("https://apni-dukaan-uccj.onrender.com/api/v1/category/get-category");
+      const { data } = await axios.get(`${base_url}/api/v1/category/get-category`);
       if (data?.success) {
         setCategories(data.category);
       }
@@ -42,7 +44,7 @@ const CreateProducts = () => {
       productData.append("shipping",shipping);
       productData.append("photo",photo);
       productData.append("category",category);
-      const {data} = await axios.post("https://apni-dukaan-uccj.onrender.com/api/v1/product/create-product",productData);
+      const {data} = await axios.post(`${base_url}/api/v1/product/create-product`,productData);
       if (data?.success) {
         toast.success(`${data.product.name} is creted`);
         navigate("/dashboard/admin/products")
@@ -69,7 +71,7 @@ const CreateProducts = () => {
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h3>Create Products</h3>
+            <h1>Create Products</h1>
             <div className="m-1 w-75">
               <Select
                 bordered={false}

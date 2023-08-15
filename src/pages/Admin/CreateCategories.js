@@ -6,6 +6,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import CategoryForm from "../../components/Form/CategoryForm";
 import {Modal} from 'antd';
+import base_url from "../../utils/api";
 
 const CreateCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -17,7 +18,7 @@ const CreateCategories = () => {
   const handleSubmit = async (e)=>{
       e.preventDefault();
       try {
-        const {data} = await axios.post("https://apni-dukaan-uccj.onrender.com/api/v1/category/create-category",{name});
+        const {data} = await axios.post(`${base_url}/api/v1/category/create-category`,{name});
         if(data.success)
         {
           toast.success(`${data.category.name} created`);
@@ -36,7 +37,7 @@ const CreateCategories = () => {
   //get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("https://apni-dukaan-uccj.onrender.com/api/v1/category/get-category");
+      const { data } = await axios.get(`${base_url}/api/v1/category/get-category`);
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -50,7 +51,7 @@ const CreateCategories = () => {
   const handleUpdate = async(e)=>{
     e.preventDefault();
     try {
-        const {data} = await axios.put(`https://apni-dukaan-uccj.onrender.com/api/v1/category/update-category/${selected._id}`,{name:updateName});
+        const {data} = await axios.put(`${base_url}/api/v1/category/update-category/${selected._id}`,{name:updateName});
         if(data.success)
         {
           toast.success(`${data.category.name} is updated`);
@@ -72,7 +73,7 @@ const CreateCategories = () => {
   //deleting the single category
   const handleDelete = async (id)=>{
     try {
-        const {data} = await axios.delete(`https://apni-dukaan-uccj.onrender.com/api/v1/category/delete-category/${id}`);
+        const {data} = await axios.delete(`${base_url}/api/v1/category/delete-category/${id}`);
         if(data.success)
         {
           toast.success(`Item deleted successfully`);
@@ -98,7 +99,7 @@ const CreateCategories = () => {
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h3>Mange Categories</h3>
+            <h1>Mange Categories</h1>
             <div className="p-3 w-50">
               <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName} />
             </div>

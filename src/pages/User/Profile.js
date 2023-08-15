@@ -4,6 +4,8 @@ import Layout from "../../components/Layout/Layout";
 import { useAuth } from '../../Context/Auth';
 import toast  from 'react-hot-toast';
 import axios from 'axios';
+import base_url from '../../utils/api';
+import "../../Styles/AuthStyles.css";
 
 const Profile = () => {
       //context
@@ -28,7 +30,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const  {data } = await axios.put("https://apni-dukaan-uccj.onrender.com/api/v1/auth/profile", {
+      const  {data } = await axios.put(`${base_url}/api/v1/auth/profile`, {
         name,
         email,
         password,
@@ -51,16 +53,14 @@ const Profile = () => {
     }
   };
   return (
-    <Layout title={"Your Profile"}>
-      <div className="container-fluid m-3 p-3 dashboard">
+    <Layout title={`${auth?.user.name} Profile`}>
+      
+      <div className="container" style={{marginTop:"30px"}}>
         <div className="row">
-          <div className="col-md-3">
-            <UserMenu />
-          </div>
-          <div className="col-md-8">
-            <div className="form-container" >
+          <div className="col-md-12">
+            <div className="form-container mt-0 mb-5" >
               <form onSubmit={handleSubmit}>
-                <h4 className="title">USER PROFILE</h4>
+                <h4 className="title" style={{fontFamily:"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif",fontSize:"2.2rem"}}>{auth?.user?.name}</h4>
                 <div className="mb-3">
                   <input
                     type="text"
@@ -90,7 +90,7 @@ const Profile = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     className="form-control"
                     id="exampleInputPassword1"
-                    placeholder="Enter Your Password"
+                    placeholder="Enter new Password"
                   />
                 </div>
                 <div className="mb-3">

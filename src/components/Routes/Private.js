@@ -3,6 +3,7 @@ import {useAuth} from "../../Context/Auth";
 import {Outlet} from "react-router-dom";
 import axios from "axios";
 import Spinner from "../Spinner";
+import base_url from "../../utils/api";
 
 export default function PrivateRoute(){
     const [ok,setOk] = useState(false); 
@@ -11,7 +12,7 @@ export default function PrivateRoute(){
         const authCheck = async() =>{
             const data = localStorage.getItem('auth')
             const parseData = JSON.parse(data)
-            const res = await axios.get('https://apni-dukaan-uccj.onrender.com/api/v1/auth/user-auth', {
+            const res = await axios.get(`${base_url}/api/v1/auth/user-auth`, {
                 headers: {
                     Authorization: parseData.token
                 }

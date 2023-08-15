@@ -3,6 +3,7 @@ import { useSearch } from "../../Context/Search";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
+import base_url from "../../utils/api";
 const SearchInput = () => {
   const [values, setValues] = useSearch();
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const SearchInput = () => {
     e.preventDefault();
     try {
       const { data } = await axios.get(
-        `https://apni-dukaan-uccj.onrender.com/api/v1/product/search-product/${values.keyword}`
+        `${base_url}/api/v1/product/search-product/${values.keyword}`
       );
       setValues({ ...values, results: data });
       navigate("/search");
@@ -27,16 +28,16 @@ const SearchInput = () => {
         onSubmit={handleSubmit}
       >
         <input
-          className="form-control btn-outline-success"
+          className="form-control "
           type="search"
           placeholder="Search"
           aria-label="Search"
           value={values.keyword}
           onChange={(e) => setValues({ ...values, keyword: e.target.value })}
-          style={{borderRadius:"8px 0px 0px 8px", color:"white"}}
+          style={{borderRadius:"8px 0px 0px 8px",backgroundColor:"#e0e0e0",boxShadow:"none"}}
         />
-        <button className="btn btn-outline-success" type="submit" style={{padding:"2px 8px", marginRight:"5px",borderRadius:"0px 4px 4px 0"}}>
-         <BiSearch/>
+        <button className="btn " type="submit" style={{padding:"2px 8px", marginRight:"5px",borderRadius:"0px 8px 8px 0",backgroundColor:"#e0e0e0"}}>
+         <BiSearch style={{color:"black"}}/>
         </button>
       </form>
     </div>
