@@ -47,6 +47,7 @@ const Products = () => {
         );
         setLoading(false);
         setProducts([...products, ...data?.products]);
+        getTotal();
       }
     } catch (error) {
       setLoading(false);
@@ -112,7 +113,7 @@ const Products = () => {
         { sort, page, checked, radio }
       );
       setTotal(data?.count);
-      if (page === 1 || checked.length || radio.length) {
+      if (page === 1) {
         console.log(data);
         setProducts(data?.products);
       } else{
@@ -151,14 +152,12 @@ const Products = () => {
     if (checked.length || radio.length) {
       getSortProduct();
     }
-    getTotal();
   }, [checked, radio,]);
 
   useEffect(() => {
     if (checked.length || radio.length || sort !== "") {
       getSortProduct();
     }
-    getTotal();
   }, [sort, checked, radio,page]);
 
   return (

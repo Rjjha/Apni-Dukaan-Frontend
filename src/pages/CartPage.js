@@ -113,7 +113,7 @@ const CartPage = () => {
                             alt={p.name}
                             width="90px"
                             height="90px"
-                            style={{ borderRadius: "5px", objectFit: "cover",marginRight:"4px"}}
+                            style={{ borderRadius: "5px", objectFit: "cover"}}
                           ></img>
                           <div>
                             <p
