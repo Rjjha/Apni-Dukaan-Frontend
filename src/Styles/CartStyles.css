@@ -4,6 +4,7 @@
     align-items:center;
     width:100%;
     flex-wrap:wrap;
+    margin-right: 8px;
 }
 .cart_contain_2{
     display:flex;
@@ -67,6 +68,9 @@
 
 @media screen and (max-width: 800px) {
     .med{
+      display: none;
+    }
+    .med p{
       display: none;
     }
     .payment{
