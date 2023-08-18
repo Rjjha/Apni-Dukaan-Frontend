@@ -60,7 +60,7 @@ const Categories = () => {
           return (
             <>
               <div className="cat_head text-center mt-2 ">
-                <h2 className="mb-5">{obj?.category?.slug}</h2>
+                <h2 className="mb-5">{(obj?.category?.slug).toUpperCase()}</h2>
                 <div>
                 <Slider {...settings}>
                   {obj.products.map((p) => {
