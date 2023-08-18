@@ -63,7 +63,7 @@ const Header = () => {
                 </Link>
                 <ul class="dropdown-menu">
                   <li>
-                    <Link to={`/categories`} className="dropdown-item ">
+                    <Link to={`/categories`} className="dropdown-item d_item">
                       All categories
                     </Link>
                   </li>
@@ -71,7 +71,7 @@ const Header = () => {
                     <li>
                       <Link
                         to={`/category/${c.slug}`}
-                        className="dropdown-item"
+                        className="dropdown-item d_item"
                       >
                         {c.name}
                       </Link>
@@ -97,7 +97,7 @@ const Header = () => {
                   >
                     {auth?.user?.name}
                   </NavLink>
-                  <ul className="dropdown-menu">
+                  <ul className="dropdown-menu change-dropdown-menu">
                     <li>
                       <NavLink
                         to={`/dashboard/${

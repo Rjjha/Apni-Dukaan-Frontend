@@ -38,6 +38,53 @@
   flex-direction: column;
 }
 
+.sorting{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline !important;
+}
+
+.sort_icon{
+   margin: 0 1vw 0 1.3vw; 
+  font-size: 1.55rem;
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: black;
+  color: white;
+  padding: 2px 2px;
+}
+.sort_icon:hover{
+  cursor: pointer;
+}
+.sorting p{
+  margin-left: 1vw;
+  font-size: 1.1rem;
+  opacity: 0.93;
+}
+.sorting hr{
+  margin-bottom: 32px;
+  margin-left: 2.5vw;
+}
+.sort_form{
+  flex: 5;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2vw;
+  font-size: 1.1rem;
+  opacity: 0.93;
+}
+.sort_label{
+  margin: 0 1vw;
+}
+
+.sort-input{
+  border: 1px solid white;
+}
+.sort-input option{
+  font-size: 1.1rem;
+  opacity: 0.93;
+}
+
 
 @media screen and (max-width: 930px){
   .filter{
@@ -58,5 +105,15 @@
   .prdct_main{
     flex: 6;
     padding: 2px 1vw;
+  }
+  .sorting{
+    display: flex !important;
+    flex-direction: column !important;
+    margin-bottom: 8px !important;
+    align-items: baseline !important;
+    justify-content: flex-start !important;
+  }
+  .sort_icon{
+    margin-bottom: 2.8vh;
   }
 }

@@ -32,7 +32,7 @@ const CategoryProduct = () => {
           <h2>
           <span className="p1" onClick={()=>navigate("/")} >Home</span>
               <span>/</span>
-              <span className="p2">{category.name}</span>
+              <span className="p2">{category?.name}</span>
           </h2>
           <h4 className='text-center' style={{color:"#617d98"}}>{products.length < 1 ? "No Products found" : `Found ${products.length} Results`}</h4>
         </div>
@@ -40,7 +40,7 @@ const CategoryProduct = () => {
             <div className='text-center'>
               <div className="d-flex flex-wrap mt-4 justify-content-center">
             {products?.map( (p)=> (
-                <Card P_Id = {p._id} photo = {p.photo} name = {p.name} price = {p.price} slug={p.slug}/>
+                <Card P_Id = {p?._id} photo = {p?.photo} name = {p?.name} price = {p?.price} slug={p.slug}/>
             ))}
             </div>
             </div>

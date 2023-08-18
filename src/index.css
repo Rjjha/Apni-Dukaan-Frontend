@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+body{
+  background: none !important;
+  color: none !important;
+}
 /* font-family: 'Poppins', sans-serif; */
 /* font-family: 'Playfair Display', serif; */
 
@@ -237,4 +241,29 @@ h1 h2 h3 h4 {
 .cont_p{
   line-height: 2rem;
   color: #617d98;
+}
+
+.d_item.active{
+  color: black;
+  background-color: #eaded7;
+}
+
+.dropdown-item.active{
+  color: black;
+  background-color: #eaded7;
+}
+.change-dropdown-menu.active{
+  color: black;
+  background-color: #eaded7;
+}
+
+.S9gUrf-YoZ4jf{
+  position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center
+}
+
+#container{
+  padding: 0;
 }

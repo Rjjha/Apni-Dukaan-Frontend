@@ -7,6 +7,7 @@ import { useNavigate,useLocation } from "react-router-dom";
 import {useAuth} from "../../Context/Auth";
 import base_url from "../../utils/api";
 import { Link } from "react-router-dom";
+import GoogleSign from "./GoogleSign";
 
 const Login = () => {
       const [email,setEmail] = useState("");
@@ -43,7 +44,7 @@ const Login = () => {
       
   return (
     <Layout title="Login - Apni Dukaan">
-      <div className="form-container text-center" style={{ minHeight: "50vh"}}>
+      <div className="form-container text-center mb-5" style={{ minHeight: "60vh"}}>
         <form onSubmit={handleSubmit}>
         <h4 className="title">Login</h4>
           <div className="mb-4">
@@ -69,12 +70,15 @@ const Login = () => {
             />
           </div>
           <div className="mb-4" style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
-           <Link to="/forgot-password" className="links">Forgot Password?</Link>
-           <Link to="/register" className="links">Register</Link>
+           {/* <Link to="/forgot-password" className="links">Forgot Password?</Link> */}
+           <Link to="/register" className="links">Don't have a account ? Register</Link>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary mb-3">
             Login
           </button>
+          <div className="mb-2 form-control">
+            <GoogleSign/>
+          </div>
         </form>
       </div>
     </Layout>

@@ -6,7 +6,7 @@ const Card = ({P_Id,photo,name,price,slug}) => {
     const navigate = useNavigate();
   return (
     <>
-     <article className='card' onClick={()=>navigate(`/product/${slug}`)}>
+     <article className=' card mb-4' onClick={()=>navigate(`/product/${slug}`)}>
         <div className='cntr'>
           <img src={photo} height={"175px"} alt="photo"/>
         </div>

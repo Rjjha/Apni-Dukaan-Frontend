@@ -164,15 +164,15 @@
 
 /*section 4*/
 .section_4 {
-    min-height:60vh-5rem;
-    padding:15vh 4vh;
+    min-height:75vh-5rem;
+    padding:19vh 2vh 16vh 2vh;
     display:flex;
     flex-direction: column;
 }
 .section_4 h2{
-    font-size:2.2rem;
+    font-size:2rem;
     font-weight:780;
-    margin: 12px;
+    margin: 12px 0 35px 0;
 }
 .section_4 h2 span{
     color: green;

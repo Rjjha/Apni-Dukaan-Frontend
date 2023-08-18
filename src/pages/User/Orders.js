@@ -26,6 +26,25 @@ const Orders = () => {
 
   return (
     <Layout title={"Your Orders"}>
+      {orders.length === 0 ? (
+        <>
+        <div className="pathroute">
+          <h2>
+            <span className="p1"> Your Have No Items</span>
+          </h2>
+        </div>
+        <div className="text-center mt-5">
+            <button
+              className="btn"
+              style={{ backgroundColor: "#ab7a5f", color: "white" }}
+              onClick={() => navigate("/products")}
+            >
+              Shop More
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
       <div className="pathroute">
         <h2>
           <span className="p1" onClick={()=>navigate("/")}>Home</span>
@@ -45,7 +64,7 @@ const Orders = () => {
                       <span
                         style={{
                           color: `${
-                            o?.status === "deliverd" ? "green" : "orange"
+                            o?.status === "Delivered" ? "green" : "orange" || o?.status === "Cancel" ? "red" : "orange"
                           }`,
                         }}
                       >
@@ -129,6 +148,8 @@ const Orders = () => {
           </div>
         </div>
       </div>
+      </>
+      )}
     </Layout>
   );
 };

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import { GiCompass, GiDiamondHard, GiStabbedNote } from "react-icons/gi";
@@ -6,25 +6,46 @@ import "../Styles/HomePage.css";
 import { useAuth } from "../Context/Auth";
 import axios from "axios";
 import base_url from "../utils/api";
+import { toast } from "react-hot-toast";
+
 const HomePage = () => {
   const navigate = useNavigate();
-  const [product,setProduct] = useState();
-  const [auth,setAuth] = useAuth();
+  const [product, setProduct] = useState();
+  const [auth, setAuth] = useAuth();
+  const [feedback,setfeedback] = useState();
 
-  const featured = async() =>{
+  const handleSubmit = async(e) =>{
+    e.preventDefault();
     try {
-      const {data} = await axios.get(`${base_url}/api/v1/product/list-product/${1}`);
-      if(data)
+      const res = await axios.post(`${base_url}/api/v1/auth/feedback`,{feedback});
+      if(res && res.data.message)
       {
+        toast.success(res.data.message);
+        setfeedback();
+      }
+      
+    } catch (error) {
+      toast.error(error);
+      console.log(error);
+    }
+  }
+
+
+  const featured = async () => {
+    try {
+      const { data } = await axios.get(
+        `${base_url}/api/v1/product/list-product/${1}`
+      );
+      if (data) {
         setProduct(data.products);
       }
     } catch (error) {
       console.log(error);
     }
-  }
-  useEffect(()=>{
+  };
+  useEffect(() => {
     featured();
-  },[])
+  }, []);
   return (
     <Layout>
       <section className="hero">
@@ -53,13 +74,35 @@ const HomePage = () => {
         <h2>Featured Products</h2>
         <div className="under_score"></div>
         <article>
-          <img src={product?.length ?  product[0]?.photo : "/images/template.jpg"} alt="photo" onClick={()=>navigate(`/product/${product[0].slug}`)} />
+          <img
+            src={product?.length ? product[0]?.photo : "/images/template.jpg"}
+            alt="photo"
+            onClick={() => navigate(`/product/${product[0].slug}`)}
+          />
           <div className="feat_prd">
-            {product?.length ?  <p className="p_tag1" onClick={()=>navigate(`/product/${product[0].slug}`)}>{product[0]?.name} </p> :<p className="p_tag1">Apni Dukaan</p> }
-            {product?.length ?  <p className="p_tag2" onClick={()=>navigate(`/product/${product[0].slug}`)}>₹ {product[0]?.price} </p> :<p className="p_tag2">₹ 500</p> }
+            {product?.length ? (
+              <p
+                className="p_tag1"
+                onClick={() => navigate(`/product/${product[0].slug}`)}
+              >
+                {product[0]?.name}{" "}
+              </p>
+            ) : (
+              <p className="p_tag1">Apni Dukaan</p>
+            )}
+            {product?.length ? (
+              <p
+                className="p_tag2"
+                onClick={() => navigate(`/product/${product[0].slug}`)}
+              >
+                ₹ {product[0]?.price}{" "}
+              </p>
+            ) : (
+              <p className="p_tag2">₹ 500</p>
+            )}
           </div>
         </article>
-        <div className="text-center mb-5 mt-5">
+        <div className="text-center mb-5 mt-3">
           <button
             className="btn all_prod button"
             onClick={() => navigate("/products")}
@@ -118,12 +161,74 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="section_4 text-center">
-         <h2>Thank You <span>{auth?.user?.name}</span> for Visiting Our Website</h2>
-         <h4>In case of any query</h4>
-         <div>
-         <button className="button btn" onClick={() => navigate("/contact")}> Please Contact</button>
-         </div>
+      <section className="section_4 container">
+        <div className="row">
+          <div className="col-md-6" style={{paddingRight:"3rem"}}>
+            <h2>
+              What did you think of us?
+            </h2>
+            <p className="cont_p mb-5 mt-3">
+              Customer satisfaction is our top-most priorty. Today were are here
+              only due to your trust and support, and our constant efforts to
+              make the platform better everyday. Please provide your valuable
+              feedback, and help the platform grow.
+            </p>
+          </div>
+          <div className="col-md-6 d-flex flex-column justify-content-center ">
+            {auth?.user?.email ? (
+              <>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder={auth?.user?.email}
+                      disabled
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <textarea
+                      type="text"
+                      placeholder="Give Your Feedback"
+                      className="form-control"
+                      value={feedback}
+                      onChange={(e) => {
+                        setfeedback(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div>
+                  <button type="submit" className="btn button mb-4">
+                    Send Your Feedback
+                  </button>
+                  </div>
+                </form>
+              </>
+            ) : (
+              <>
+                <div>
+                  <div className="mb-3">
+                    <textarea
+                      type="text"
+                      placeholder="Give Your Feedback"
+                      className="form-control"
+                      disabled
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <button
+                      className="button btn pl-3 pr-3"
+                      onClick={() => navigate("/login")}
+                      style={{letterSpacing:"0.1rem"}}
+                    >
+                      LOGIN
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       </section>
     </Layout>
   );

@@ -174,7 +174,7 @@ const CartPage = () => {
                 <hr className="mt-5" />
                 <div className="payment">
                   <div className="payment_1">
-                    {auth?.user && (
+                    {auth?.user && auth?.user?.address &&(
                       <div className="mt-2 text-center payment_2">
                         {!clientToken || !cart?.length ? (
                           ""
@@ -199,7 +199,7 @@ const CartPage = () => {
                               className="btn button"
                               onClick={handlePayment}
                               disabled={
-                                loading || !instance || !auth?.user?.address
+                                loading || !instance || !auth?.user?.address 
                               }
                             >
                               {loading ? "...loading" : "Make Payment"}
@@ -248,7 +248,7 @@ const CartPage = () => {
                                 navigate("/dashboard/user/profile")
                               }
                             >
-                              Update Address 
+                              Update Address to checkout
                             </button>
                           )}
                         </div>
