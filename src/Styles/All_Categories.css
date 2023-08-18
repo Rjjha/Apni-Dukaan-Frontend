@@ -68,14 +68,7 @@
         margin-left: 5vw !important;
     }
 }
- @media screen and (max-width: 420px){
-    .slick-slide{
-        width: 80vw !important;
-    }
-    .slick-active {
-        margin-left:3vw !important;
-    }
-}
+ 
 /* @media screen and (max-width: 600px){
     .slick-slide{
         width: 60vw !important;

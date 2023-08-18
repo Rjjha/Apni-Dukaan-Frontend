@@ -95,19 +95,3 @@
         cursor: pointer;
     }
 }
-@media screen and (max-width: 420px){
-    .cntr{
-        width: 80vw;
-    }
-    .card{
-        width: 80vw;
-    }
-    .ftr{
-        width: 80vw;
-    }
-    .cntr :hover{
-        opacity: 0.7;
-        transform: translate(-7px, -7px);
-        cursor: pointer;
-    }
-}
