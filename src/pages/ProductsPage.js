@@ -151,12 +151,14 @@ const Products = () => {
     if (checked.length || radio.length) {
       getSortProduct();
     }
+    getTotal();
   }, [checked, radio,]);
 
   useEffect(() => {
     if (checked.length || radio.length || sort !== "") {
       getSortProduct();
     }
+    getTotal();
   }, [sort, checked, radio,page]);
 
   return (
