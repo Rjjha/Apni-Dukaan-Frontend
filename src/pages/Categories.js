@@ -55,7 +55,7 @@ const Categories = () => {
           <span className="p2">All Categories</span>
         </h2>
       </div>
-      <div className="container d-flex flex-column cat_main">
+      <div className="container d-flex flex-column cat_main mb-5">
         {arr.map((obj) => {
           return (
             <>
