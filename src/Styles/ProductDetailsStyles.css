@@ -11,13 +11,13 @@
 }
 .img_cont{
   flex:6;
-  width: 100%;
-  height: 60%;
+  width: 90%;
+  height: 70vh;
   padding-right: 3vw;
 }
 .img_cont img{
-  width: 80%;
-  height: 45%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 15px;
 }
@@ -51,7 +51,12 @@
   font-weight: 700;
   font-size: 2.3rem;
 }
-
+@media screen and (max-width: 1300px){
+  .img_cont{
+    height: 60vh;
+    width: 100%;
+  }
+}
 @media screen and (max-width: 970px){
   .main_cont{
     flex-direction: column;
@@ -61,6 +66,8 @@
     display: flex;
     justify-content: center;
     margin-bottom: 4vh;
+    height: 50vh;
+    width: 100%;
   }
   .body_cont{
     flex: 10;
