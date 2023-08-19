@@ -10,6 +10,7 @@ import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import Loader from "../components/Loader";
 
 
 const Categories = () => {
@@ -56,7 +57,7 @@ const Categories = () => {
         </h2>
       </div>
       <div className="container d-flex flex-column cat_main mb-5">
-        {arr.map((obj) => {
+        {arr ? arr.map((obj) => {
           return (
             <>
               <div className="cat_head text-center mt-2 ">
@@ -81,7 +82,9 @@ const Categories = () => {
               </div>
             </>
           );
-        })}
+        }): (
+          <Loader ht={100} wd={100}/>
+        )}
       </div>
     </Layout>
   );

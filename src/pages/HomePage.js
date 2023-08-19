@@ -7,6 +7,7 @@ import { useAuth } from "../Context/Auth";
 import axios from "axios";
 import base_url from "../utils/api";
 import { toast } from "react-hot-toast";
+import Loader from "../components/Loader";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -74,11 +75,15 @@ const HomePage = () => {
         <h2>Featured Products</h2>
         <div className="under_score"></div>
         <article>
-          <img
-            src={product?.length ? product[0]?.photo : "/images/template.jpg"}
-            alt="photo"
-            onClick={() => navigate(`/product/${product[0].slug}`)}
-          />
+          {product?.length ? (
+           <img
+           src={product[0]?.photo}
+           alt="photo"
+           onClick={() => navigate(`/product/${product[0].slug}`)}/>
+          ):(
+          <Loader ht={100} wd={100}/>
+          )}
+          
           <div className="feat_prd">
             {product?.length ? (
               <p
