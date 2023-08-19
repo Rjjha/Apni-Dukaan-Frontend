@@ -145,7 +145,7 @@ const Products = () => {
   //we page first loaded
   useEffect(() => {
     if (!checked.length && !radio.length && sort === "") getAllProducts();
-    setTotal(products.length);
+    getTotal();
   }, [checked.length, radio.length, sort]);
 
    useEffect(() => {
