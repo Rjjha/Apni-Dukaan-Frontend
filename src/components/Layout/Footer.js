@@ -20,7 +20,7 @@ const Footer = () => {
         }}
       >
         <div>
-          <Link to="https://github.com/Rjjha" target="_blank">
+          <Link to="https://github.com/Rjjha/Apni-Dukaan-Frontend" target="_blank">
             <AiFillGithub style={{fontSize:"40px",color:"#ab7a5f"}}/>
           </Link>
         </div>
