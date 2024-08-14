@@ -20,22 +20,22 @@ const Footer = () => {
         }}
       >
         <div>
-          <Link to="https://github.com/Rjjha/Apni-Dukaan-Frontend" target="_blank">
+          <Link>
             <AiFillGithub style={{fontSize:"40px",color:"#ab7a5f"}}/>
           </Link>
         </div>
         <div>
-          <Link to="https://www.linkedin.com/in/rajesh-jha-0aa47a205/" target="_blank">
+          <Link>
             <AiFillLinkedin style={{fontSize:"40px",color:"#ab7a5f"}} />
           </Link>
         </div>
         <div>
-          <Link to="https://www.instagram.com/rj_jhaji/" target="_blank">
+          <Link>
             <AiFillInstagram style={{fontSize:"40px",color:"#ab7a5f"}}/>
           </Link>
         </div>
         <div>
-          <Link to="https://github.com/Rjjha" target="_blank">
+          <Link>
             <AiFillYoutube style={{fontSize:"40px",color:"#ab7a5f"}}/>
           </Link>
         </div>
